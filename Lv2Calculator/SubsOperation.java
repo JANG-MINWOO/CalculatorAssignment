@@ -1,7 +1,7 @@
 package Lv2Calculator;
 
-public class AddOperation {
+public class SubsOperation {
     public double operate(int firstNumber, int secondNumber) {
-        return firstNumber + secondNumber;
+        return firstNumber - secondNumber;
     }
 }
