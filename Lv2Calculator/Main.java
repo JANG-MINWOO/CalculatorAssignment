@@ -13,7 +13,7 @@ public class Main {
             System.out.println("두 번째 숫자를 입력: ");
             int secondNumber = sc.nextInt();
             System.out.println("연산자를 입력: ");
-            String operator = sc.nextLine(); //여기까지 input
+            String operator = sc.next(); //여기까지 input
 
             Calculator calculator = getCalculator(operator);
             System.out.println("결과: " + calculator.calculate(firstNumber, secondNumber));
