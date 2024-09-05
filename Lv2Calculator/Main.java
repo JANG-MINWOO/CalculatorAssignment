@@ -7,7 +7,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String end = "exit";
         String endCheck = "";//끝내기 확일
-        String operator = "";//연산자 미리선언해서
+        String deleteResult;
 
         Calculator calculator = new Calculator(new AddOperation()); //계산기를 반복문 바깥으로 꺼냄
         while (!end.equals(endCheck)) {
@@ -16,7 +16,7 @@ public class Main {
             System.out.println("두 번째 숫자를 입력: ");
             int secondNumber = sc.nextInt();
             System.out.println("연산자를 입력: ");
-            operator = sc.next(); //여기까지 input
+            String operator = sc.next(); //여기까지 input
 
             calculator.setOperation(getOperation(operator));
 
@@ -35,14 +35,20 @@ public class Main {
             endCheck = sc.next();
             sc.nextLine();
 
-            System.out.print("저장된 결과값: ");
+            System.out.println("저장된 결과값: ");
             for (Double result : calculator.getResults()) {
                 System.out.println(result);
+            }
+            System.out.println("가장 오래된 결과값을 지우시겠습니까?(yes or 아무키+엔터)");
+            deleteResult = sc.next();
+            if (deleteResult.equals("yes")) {
+                calculator.setResults();
             }
         }
     }
 
-    //    private static Calculator getCalculator(String operator) {
+
+//        private static Calculator getCalculator(String operator) {
 //        Calculator calculator = new Calculator(new AddOperation());
 //        switch (operator) {
 //            case "+" -> calculator.setOperation(new AddOperation());
@@ -51,8 +57,8 @@ public class Main {
 //            case "/" -> calculator.setOperation(new DivideOperation());
 //        }
 //        return calculator;
-//    } //연산자에 맞는 Calculator의 기능을 이곳에서 조건으로 정한뒤
-//    //getter로 main메서드에 보냄
+//    } //연산자에 맞는 Calculator 의 기능을 이곳에서 조건으로 정한뒤
+//    //getter 로 main 메서드에 보냄
 
     private static AbsOperation getOperation(String operator) {
         return switch (operator) {
