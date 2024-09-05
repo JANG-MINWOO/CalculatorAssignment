@@ -21,7 +21,7 @@ public class Calculator {
         return new ArrayList<>(results);
     }//getResultList()메서드는 results 의 사본을 반환, 외부에서 리스트를 수정할 수 없게
 
-    public void setResults() {
+    public void setResults() { //.remove() 이라는 행동만 하기 위해 수정
         if (results != null) {
             this.results.remove(0);
         }
