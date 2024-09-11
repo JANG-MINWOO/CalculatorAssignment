@@ -9,8 +9,26 @@ public class ArithmeticCalculator <T extends Number>{ //T 타입 제네릭클래
     private List<Double> results = new ArrayList<>();
 
     public T calculate(T a, T b, OperatorType operator){ //피연산자두개와 연산자하나를 받아 result에 대입
-        double result = operator.getOperation().apply(a.doubleValue(), b.doubleValue());
-        results.add(result); //result를 결과값들을 저장할 List results에 대입
+//        double result = operator.getOperation().apply(a.doubleValue(), b.doubleValue());
+
+        double result;
+        switch (operator){
+            case ADD:
+            case SUBTRACT:
+            case MULTIPLY: //위 세가지 계산은 예외 없음
+                result=operator.getOperation().apply(a.doubleValue(),b.doubleValue());
+                break;
+            case DIVIDE:  //나누기는 두번째인자 0 불가능 예외가 있기때문에
+                if(a.doubleValue() == 0){
+                    throw new ArithmeticException("0으로 나눌 수 없음"); //예외날리기
+                }
+                result=operator.getOperation().apply(a.doubleValue(),b.doubleValue());
+                break; //아니면 계산하고 break
+
+            default: //다 해당안되면 사칙연산자가아니라 예외날리기
+                throw new IllegalArgumentException("유효하지 않은 연산자"+operator.getOperator());
+        }
+                results.add(result); //result를 결과값들을 저장할 List results에 대입
         return (T) (Number) result; //Number에 해당하는녀석들을 T 타입 형변환후 return
     }
 
